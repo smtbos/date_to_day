@@ -1,0 +1,160 @@
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script type="text/javascript">
+		function ch(event) {
+			var n = (event.which) ? event.which : event.keyCode;
+
+			if (n >= 48 && n <= 57) {
+				return true;
+			} else {
+				return false;
+			}
+
+		}
+
+		function date_to_day() {
+			/*Geting Date*/
+			var day = document.getElementById("day").value;
+			var month = document.getElementById("month").value;
+			var year = document.getElementById("year").value;
+
+			day = eval(day);
+			month = eval(month);
+			year = eval(year);
+
+			var m_d = new Array(0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+
+			if (year % 4 == 0) {
+				m_d[2] = 29;
+			}
+
+			if (year >= 1 && month >= 1 && month <= 12 && day >= 1 && day <= m_d[month]) {
+
+				document.getElementById("date_allert").innerHTML = "";
+				document.getElementById("day_name").value = "";
+				month -= 1;
+
+				var dat = new Date();
+				dat.setFullYear(year, month, day);
+
+				var dayy = dat.getDay();
+
+				document.getElementById("day_name").value = dayy;
+
+				switch (dayy) {
+
+					case 0:
+						document.getElementById("day_name").value = "Sunday";
+						break;
+					case 1:
+						document.getElementById("day_name").value = "Monday";
+						break;
+					case 2:
+						document.getElementById("day_name").value = "Tuesday";
+						break;
+					case 3:
+						document.getElementById("day_name").value = "Wednesday";
+						break;
+					case 4:
+						document.getElementById("day_name").value = "Thursday";
+						break;
+					case 5:
+						document.getElementById("day_name").value = "Friday";
+						break;
+					case 6:
+						document.getElementById("day_name").value = "Saturday";
+						break;
+				}
+			} else {
+				document.getElementById("day_name").value = "";
+				document.getElementById("date_allert").innerHTML = "<br>" + "<font>*</font>" + "<font>Invalid Date</font>";
+			}
+		}
+	</script>
+	<style type="text/css">
+		tt {
+			font-size: 25px;
+
+		}
+
+		#div3 {
+			height: 30px;
+			width: 200px;
+			margin-top: 15px;
+		}
+
+		#div1 {
+			height: 230px;
+			width: 250px;
+			border: 5px solid black;
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 50px;
+			background-color: #D1CDD5;
+			border-radius: 10px;
+		}
+
+		#div2 {
+			margin-left: auto;
+			margin-right: auto;
+			width: 200px;
+		}
+
+		#day,
+		#month {
+
+			width: 48px;
+		}
+
+		#year {
+
+			width: 94px;
+		}
+
+		#bt {
+
+			width: 200px;
+		}
+
+		#day_name {
+
+			width: 200px;
+
+		}
+
+		#day_name,
+		#bt,
+		#year,
+		#day,
+		#month {
+			border: 5px solid #C79EFA;
+			border-radius: 10px;
+			text-align: center;
+			margin-top: 12px;
+			height: 36px;
+		}
+
+		font {
+			font-size: 12px;
+			color: red;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="div1">
+		<div id="div2">
+			<div id="div3"> <tt>Date : </tt> </div>
+			<input type="text" id="day" placeholder="DD" onkeypress="return ch(event)" maxlength="2">
+			<input type="text" id="month" placeholder="MM" onkeypress="return ch(event)" maxlength="2">
+			<input type="text" id="year" placeholder="YYYY" onkeypress="return ch(event)" maxlength="4">
+			<span id="date_allert"></span><br>
+			<input type="button" onclick="date_to_day()" id="bt" value="Date To Day"> <br>
+			<input type="text" id="day_name" readonly>
+		</div>
+	</div>
+</body>
+
+</html>
